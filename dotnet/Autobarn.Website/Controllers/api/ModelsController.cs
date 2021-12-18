@@ -1,18 +1,24 @@
-﻿using Autobarn.Data;
+﻿using System;
+using Autobarn.Data;
 using Autobarn.Data.Entities;
 using Autobarn.Website.Models;
 using Microsoft.AspNetCore.Mvc;
 using System.Collections.Generic;
 using System.Globalization;
+using System.Threading.Tasks;
+using Autobarn.Messages;
+using EasyNetQ;
 
 namespace Autobarn.Website.Controllers.api {
     [Route("api/[controller]")]
     [ApiController]
     public class ModelsController : ControllerBase {
         private readonly IAutobarnDatabase db;
+        private readonly IBus bus;
 
-        public ModelsController(IAutobarnDatabase db) {
+        public ModelsController(IAutobarnDatabase db, IBus bus) {
             this.db = db;
+            this.bus = bus;
         }
 
         [HttpGet]
@@ -37,7 +43,7 @@ namespace Autobarn.Website.Controllers.api {
         }
 
         [HttpPost("{id}")]
-        public IActionResult Post(string id, [FromBody] VehicleDto dto) {
+        public async Task<IActionResult> Post(string id, [FromBody] VehicleDto dto) {
             var existingVehicle = db.FindVehicle(dto.Registration);
             if (existingVehicle != default) return Conflict($"Sorry - vehicle with registration {dto.Registration} is already listed in our database!");
 
@@ -50,7 +56,20 @@ namespace Autobarn.Website.Controllers.api {
                 VehicleModel = vehicleModel
             };
             db.CreateVehicle(vehicle);
+            await PublishNewVehicleMessage(vehicle);
             return Created($"/api/vehicles/{vehicle.Registration}", vehicle.ToResource());
+        }
+
+        private async Task PublishNewVehicleMessage(Vehicle vehicle) {
+            var m = new NewVehicleMessage {
+                Registration = vehicle.Registration,
+                ModelName = vehicle.VehicleModel?.Name ?? "MODEL_NAME_NOT_FOUND",
+                ManufacturerName = vehicle.VehicleModel?.Manufacturer?.Name ?? "MANUFACTURER_NOT_FOUND",
+                Color = vehicle.Color,
+                Year = vehicle.Year,
+                ListedAt = DateTimeOffset.UtcNow
+            };
+            await bus.PubSub.PublishAsync(m);
         }
     }
 }
