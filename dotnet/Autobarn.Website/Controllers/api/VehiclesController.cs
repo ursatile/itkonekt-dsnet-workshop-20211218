@@ -22,13 +22,11 @@ namespace Autobarn.Website.Controllers.api {
         const int PAGE_SIZE = 10;
         // GET: api/vehicles
         [HttpGet]
-        public IActionResult Get(int index = 0) {
-            var items = db.ListVehicles().Skip(index * PAGE_SIZE).Take(PAGE_SIZE);
+        [Produces("application/hal+json")]
+        public IActionResult Get(int index = 0, int count = PAGE_SIZE) {
+            var items = db.ListVehicles().Skip(index).Take(count);
             var total = db.CountVehicles();
-            dynamic _links = new ExpandoObject();
-            _links.self = new { href = $"/api/vehicles?index={index}" };
-            if (index > 0) _links.prev = new { href = $"/api/vehicles?index={index - PAGE_SIZE}" };
-            if (index < total) _links.next = new { href = $"/api/vehicles?index={index + PAGE_SIZE}" };
+            var _links = Hal.Paginate("/api/vehicles", index, count, total);
             var result = new {
                 _links,
                 items
