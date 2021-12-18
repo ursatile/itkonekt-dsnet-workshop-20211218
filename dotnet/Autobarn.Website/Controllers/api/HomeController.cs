@@ -18,7 +18,7 @@ namespace Autobarn.Website.Controllers.api {
                         href = "/api/vehicles"
                     },
                     models = new {
-                        href = "https://myotherserver.mycompany.com/api/models"
+                        href = "/api/models"
                     }
                 }
             };
