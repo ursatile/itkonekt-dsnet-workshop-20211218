@@ -8,9 +8,14 @@ using Autobarn.Data.Entities;
 namespace Autobarn.Website.Controllers.api {
     public static class Hal {
 
-        public static dynamic ToResource(this Vehicle vehicle) {
-            var resource = vehicle.ToDynamic();
-            resource._links = new {
+        public static IDictionary<string, object> ToResource(this Vehicle vehicle) {
+            Dictionary<string, object> resource = new Dictionary<string, object>();
+            var properties = TypeDescriptor.GetProperties(vehicle.GetType());
+            foreach (PropertyDescriptor prop in properties) {
+                if (Ignore(prop)) continue;
+                resource.Add(prop.Name, prop.GetValue(vehicle));
+            }
+            resource["_links"] = new {
                 self = new {
                     href = $"/api/vehicles/{vehicle.Registration}"
                 },

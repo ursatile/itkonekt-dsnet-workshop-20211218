@@ -37,7 +37,7 @@ namespace Autobarn.Website.Controllers.api {
 
         // GET api/vehicles/ABC123
         [HttpGet("{id}")]
-        // [Produces("application/hal+json")]
+        [Produces("application/hal+json")]
         public IActionResult Get(string id) {
             var vehicle = db.FindVehicle(id);
             if (vehicle == default) return NotFound();
