@@ -11,7 +11,16 @@ service Greeter {
 }
 
 // The request message containing the user's name.
-message HelloRequest { string name = 1; }
+message HelloRequest {
+  string name = 1;
+  enum FriendlinessLevel {
+    UNKNOWN = 0;
+    FRIENDLY = 1;
+    NEUTRAL = 2;
+    HOSTILE = 3;
+  }
+  FriendlinessLevel friendliness = 2;
+}
 
 // The response message containing the greetings.
 message HelloReply { string message = 1; }
