@@ -8,16 +8,16 @@ using Microsoft.AspNetCore.Mvc;
 using Shouldly;
 
 namespace Autobarn.Website.Tests {
-    public class ApiVehiclesControllerTests {
-        [Fact]
-        public void POST_with_existing_vehicle_returns_conflict() {
-            var db = new FakeDatabase();
-            var c = new ModelsController(db);
-            var dto = new Models.VehicleDto { Registration = "CONFLICT" };
-            var result = c.Post("dmc-delorean", dto);
-            result.ShouldBeOfType<ConflictObjectResult>();
-        }
-    }
+    //public class ApiVehiclesControllerTests {
+    //    [Fact]
+    //    public void POST_with_existing_vehicle_returns_conflict() {
+    //        var db = new FakeDatabase();
+    //        var c = new ModelsController(db);
+    //        var dto = new Models.VehicleDto { Registration = "CONFLICT" };
+    //        var result = c.Post("dmc-delorean", dto);
+    //        result.ShouldBeOfType<ConflictObjectResult>();
+    //    }
+    //}
 
     public class FakeDatabase : IAutobarnDatabase {
         public int CountVehicles() {
