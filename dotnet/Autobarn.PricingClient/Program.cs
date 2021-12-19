@@ -33,6 +33,8 @@ namespace Autobarn.PricingClient {
             };
             var reply = await grpcClient.GetPriceAsync(priceRequest);
             Console.WriteLine($"Price is: {reply.Price} {reply.CurrencyCode}");
+            var newVehiclePriceMessage = NewVehiclePriceMessage.FromNewVehicleMessage(m, reply.Price, reply.CurrencyCode);
+            await bus.PubSub.PublishAsync(newVehiclePriceMessage);
         }
 
         private static IConfigurationRoot ReadConfiguration() {

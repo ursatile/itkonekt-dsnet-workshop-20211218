@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Runtime.CompilerServices;
 
 namespace Autobarn.Messages {
     public class NewVehicleMessage {

@@ -17,6 +17,8 @@ Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autobarn.PricingClient", "A
 EndProject
 Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autobarn.PricingServer", "Autobarn.PricingServer\Autobarn.PricingServer.csproj", "{6BF238AA-2299-4A6C-A6DD-916514B757A8}"
 EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "Autobarn.Notifier", "Autobarn.Notifier\Autobarn.Notifier.csproj", "{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}"
+EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
 		Debug|Any CPU = Debug|Any CPU
@@ -111,6 +113,18 @@ Global
 		{6BF238AA-2299-4A6C-A6DD-916514B757A8}.Release|x64.Build.0 = Release|Any CPU
 		{6BF238AA-2299-4A6C-A6DD-916514B757A8}.Release|x86.ActiveCfg = Release|Any CPU
 		{6BF238AA-2299-4A6C-A6DD-916514B757A8}.Release|x86.Build.0 = Release|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Debug|x64.ActiveCfg = Debug|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Debug|x64.Build.0 = Debug|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Debug|x86.ActiveCfg = Debug|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Debug|x86.Build.0 = Debug|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Release|Any CPU.Build.0 = Release|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Release|x64.ActiveCfg = Release|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Release|x64.Build.0 = Release|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Release|x86.ActiveCfg = Release|Any CPU
+		{BD24C15D-9A9A-4FFD-BEB6-059F21DA64EE}.Release|x86.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE
